@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Edit, Trash2, X, Check } from 'lucide-react';
+import TiptapEditor, { TiptapContent } from './TiptapEditor';
 
 interface ObservationListProps {
   parentId: string;
@@ -10,7 +11,7 @@ interface ObservationListProps {
 }
 
 const ObservationList: React.FC<ObservationListProps> = ({ parentId, parentType }) => {
-  const { observations, deleteObservation } = useAppContext();
+  const { observations, deleteObservation, updateObservation } = useAppContext();
   const [editingObservationId, setEditingObservationId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState<string>('');
 
@@ -42,10 +43,12 @@ const ObservationList: React.FC<ObservationListProps> = ({ parentId, parentType 
     setEditContent('');
   };
 
-  const handleSaveEdit = () => {
-    // Implementar lógica para salvar edição
-    setEditingObservationId(null);
-    setEditContent('');
+  const handleSaveEdit = (observationId: string) => {
+    if (editContent.trim()) {
+      updateObservation(observationId, editContent);
+      setEditingObservationId(null);
+      setEditContent('');
+    }
   };
 
   const handleDeleteClick = (observationId: string) => {
@@ -61,14 +64,13 @@ const ObservationList: React.FC<ObservationListProps> = ({ parentId, parentType 
   return (
     <div className="space-y-4">
       {sortedObservations.map((observation) => (
-        <div key={observation.id} className="bg-gray-50 p-4 rounded-md observation-item">
+        <div key={observation.id} className="bg-gray-50 p-4 rounded-md observation-item border border-gray-200">
           {editingObservationId === observation.id ? (
             <div className="space-y-3">
-              <textarea
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 edit-textarea"
-                value={editContent}
-                onChange={(e) => setEditContent(e.target.value)}
-                rows={3}
+              <TiptapEditor
+                content={editContent}
+                onChange={setEditContent}
+                placeholder="Edite sua observação..."
               />
               <div className="flex justify-end space-x-2">
                 <button
@@ -78,7 +80,7 @@ const ObservationList: React.FC<ObservationListProps> = ({ parentId, parentType 
                   <X size={16} className="mr-1" /> Cancelar
                 </button>
                 <button
-                  onClick={handleSaveEdit}
+                  onClick={() => handleSaveEdit(observation.id)}
                   className="inline-flex items-center px-2 py-1 border border-transparent text-sm rounded-md text-white bg-blue-600 hover:bg-blue-700"
                   disabled={!editContent.trim()}
                 >
@@ -87,29 +89,25 @@ const ObservationList: React.FC<ObservationListProps> = ({ parentId, parentType 
               </div>
             </div>
           ) : (
-            <div className="flex justify-between items-start">
-              <div className="whitespace-pre-wrap text-sm text-gray-700">
-                {observation.content}
+            <div className="flex flex-col sm:flex-row justify-between items-start">
+              <div className="content-container my-2 flex-grow">
+                <TiptapContent content={observation.content} />
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="text-xs text-gray-500">
-                  {formatDistanceToNow(new Date(observation.createdAt), { 
-                    addSuffix: true,
-                    locale: ptBR
-                  })}
-                </div>
-                <div className="observation-actions flex space-x-2">
+              <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto text-xs text-gray-500 mt-1">
+                <span className="mr-2 sm:mr-0">{formatDistanceToNow(new Date(observation.createdAt), { locale: ptBR })}</span>
+                
+                <div className="flex space-x-2 mt-1">
                   <button
                     onClick={() => handleEditClick(observation)}
-                    className="text-gray-400 hover:text-blue-500"
-                    title="Editar"
+                    className="text-blue-600 hover:text-blue-800 transition-colors"
+                    title="Editar observação"
                   >
                     <Edit size={16} />
                   </button>
                   <button
                     onClick={() => handleDeleteClick(observation.id)}
-                    className="text-gray-400 hover:text-red-500"
-                    title="Excluir"
+                    className="text-red-600 hover:text-red-800 transition-colors"
+                    title="Excluir observação"
                   >
                     <Trash2 size={16} />
                   </button>

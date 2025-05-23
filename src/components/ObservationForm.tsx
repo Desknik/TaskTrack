@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
+import TiptapEditor from './TiptapEditor';
 
 interface ObservationFormProps {
   parentId: string;
@@ -40,16 +41,13 @@ const ObservationForm: React.FC<ObservationFormProps> = ({
         <label htmlFor="observation-content" className="block text-sm font-medium text-gray-700">
           Conteúdo da Observação
         </label>
-        <textarea
-          id="observation-content"
-          name="content"
-          rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-          placeholder="Descreva a observação..."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
+        <div className="mt-1">
+          <TiptapEditor 
+            content={content} 
+            onChange={setContent} 
+            placeholder="Descreva a observação..."
+          />
+        </div>
       </div>
       <div className="flex justify-end space-x-3">
         <button

@@ -13,9 +13,14 @@ import {
   ChevronDown,
   ChevronUp,
   ArrowLeft,
+  Trash2,
 } from "lucide-react";
-import { formatHoursForTooltip, formatHoursToDisplay } from "../utils/timeUtils";
+import {
+  formatHoursForTooltip,
+  formatHoursToDisplay,
+} from "../utils/timeUtils";
 import TagBadge from "../components/TagBadge";
+import { TiptapContent } from "../components/TiptapEditor";
 
 const TicketDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,6 +31,7 @@ const TicketDetail: React.FC = () => {
     updateTicketStatus,
     getTasksForTicket,
     getTotalHoursForTicket,
+    deleteTicket,
   } = useAppContext();
 
   const [showObservationForm, setShowObservationForm] = useState(false);
@@ -67,12 +73,25 @@ const TicketDetail: React.FC = () => {
     updateTicketStatus(id, e.target.value as TicketStatus);
   };
 
+  const handleDeleteTicket = () => {
+    if (
+      window.confirm(
+        "Tem certeza que deseja excluir este chamado? Esta ação também removerá as associações com tarefas e não pode ser desfeita."
+      )
+    ) {
+      deleteTicket(id);
+      navigate("/tickets");
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center mb-4">
         <button
           onClick={() => navigate("/tickets")}
           className="mr-4 text-gray-500 hover:text-gray-700"
+          title="Voltar para lista de chamados"
+          aria-label="Voltar para lista de chamados"
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
@@ -111,6 +130,14 @@ const TicketDetail: React.FC = () => {
               <Edit className="h-5 w-5" />
               <span className="ml-1">Editar</span>
             </Link>
+            <button
+              onClick={handleDeleteTicket}
+              className="inline-flex items-center text-red-600 hover:text-red-700"
+              title="Excluir chamado"
+            >
+              <Trash2 className="h-5 w-5" />
+              <span className="ml-1">Excluir</span>
+            </button>
           </div>
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -121,7 +148,7 @@ const TicketDetail: React.FC = () => {
                 <select
                   value={ticket.status}
                   onChange={handleStatusChange}
-                  className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  className="block border p-2 w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                 >
                   <option value="aberto">Aberto</option>
                   <option value="pendente">Pendente</option>
@@ -140,9 +167,10 @@ const TicketDetail: React.FC = () => {
             </div>
             <div className="sm:col-span-2">
               <dt className="text-sm font-medium text-gray-500">Descrição</dt>
-              <dd className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">
-                {ticket.description}
-              </dd>
+
+              <div className="content-container my-2 flex-grow">
+                <TiptapContent content={ticket.description} />
+              </div>
             </div>
             <div className="sm:col-span-2">
               <dt className="text-sm font-medium text-gray-500">
@@ -184,9 +212,6 @@ const TicketDetail: React.FC = () => {
                       <div>
                         <p className="text-sm font-medium text-blue-600">
                           {task.title}
-                        </p>
-                        <p className="text-sm text-gray-500 mt-1 line-clamp-1">
-                          {task.description}
                         </p>
                       </div>
                       <div className="flex items-center">

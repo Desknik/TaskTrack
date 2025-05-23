@@ -4,8 +4,10 @@ import { TaskStatus } from '../types';
 import StatusBadge from './StatusBadge';
 import TagBadge from './TagBadge';
 import { useAppContext } from '../context/AppContext';
-import { Search, Filter, Clock, Tag } from 'lucide-react';
+import { Search, Filter, Clock, Tag, SortAsc, ArrowDownUp, SortDesc } from 'lucide-react';
 import { formatHoursToDisplay, formatHoursForTooltip } from '../utils/timeUtils';
+
+type SortOption = 'newest' | 'oldest' | 'recently-updated' | 'least-recently-updated';
 
 const TaskList: React.FC = () => {
   const { tasks, tickets, getTotalHoursForTask } = useAppContext();
@@ -15,6 +17,8 @@ const TaskList: React.FC = () => {
   const [showUnassociated, setShowUnassociated] = useState(false);
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
   const [isTagFilterMenuOpen, setIsTagFilterMenuOpen] = useState(false);
+  const [sortOption, setSortOption] = useState<SortOption>('newest');
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
 
   const getTicketTitle = (ticketId?: string) => {
     if (!ticketId) return 'Sem chamado';
@@ -36,6 +40,41 @@ const TaskList: React.FC = () => {
     
     return matchesSearch && matchesStatus && matchesTag && matchesUnassociated;
   });
+
+  const getSortedTasks = () => {
+    return [...filteredTasks].sort((a, b) => {
+      if (sortOption === 'newest') {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      } else if (sortOption === 'oldest') {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      } else if (sortOption === 'recently-updated') {
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      } else if (sortOption === 'least-recently-updated') {
+        return new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+      }
+      return 0;
+    });
+  };
+
+  const sortedTasks = getSortedTasks();
+
+  const getSortButtonText = () => {
+    switch (sortOption) {
+      case 'newest': return 'Mais recentes primeiro';
+      case 'oldest': return 'Mais antigas primeiro';
+      case 'recently-updated': return 'Atualizadas recentemente';
+      case 'least-recently-updated': return 'Atualizadas há mais tempo';
+      default: return 'Ordenar por';
+    }
+  };
+
+  const getSortIcon = () => {
+    if (sortOption === 'newest' || sortOption === 'recently-updated') {
+      return <SortDesc className="h-5 w-5 mr-2 text-gray-500" />;
+    } else {
+      return <SortAsc className="h-5 w-5 mr-2 text-gray-500" />;
+    }
+  };
 
   const formatDate = (dateString: string) => {
     // Adicionando 'T00:00:00' para garantir que a data seja tratada como local, não UTC
@@ -70,6 +109,67 @@ const TaskList: React.FC = () => {
             />
           </div>
           <div className="flex gap-2 flex-wrap">
+            {/* Sort dropdown */}
+            <div className="relative inline-block text-left">
+              <div>
+                <button
+                  type="button"
+                  className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  id="sort-menu"
+                  onClick={() => setIsSortMenuOpen(!isSortMenuOpen)}
+                >
+                  {getSortIcon()}
+                  {getSortButtonText()}
+                </button>
+              </div>
+              {isSortMenuOpen && (
+                <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+                  <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="sort-menu">
+                    <button
+                      className={`block px-4 py-2 text-sm w-full text-left ${sortOption === 'newest' ? 'bg-gray-100 text-gray-900' : 'text-gray-700'}`}
+                      onClick={() => {
+                        setSortOption('newest');
+                        setIsSortMenuOpen(false);
+                      }}
+                    >
+                      <SortDesc className="h-4 w-4 inline mr-2" />
+                      Mais recentes primeiro
+                    </button>
+                    <button
+                      className={`block px-4 py-2 text-sm w-full text-left ${sortOption === 'oldest' ? 'bg-gray-100 text-gray-900' : 'text-gray-700'}`}
+                      onClick={() => {
+                        setSortOption('oldest');
+                        setIsSortMenuOpen(false);
+                      }}
+                    >
+                      <SortAsc className="h-4 w-4 inline mr-2" />
+                      Mais antigas primeiro
+                    </button>
+                    <button
+                      className={`block px-4 py-2 text-sm w-full text-left ${sortOption === 'recently-updated' ? 'bg-gray-100 text-gray-900' : 'text-gray-700'}`}
+                      onClick={() => {
+                        setSortOption('recently-updated');
+                        setIsSortMenuOpen(false);
+                      }}
+                    >
+                      <SortDesc className="h-4 w-4 inline mr-2" />
+                      Atualizadas recentemente
+                    </button>
+                    <button
+                      className={`block px-4 py-2 text-sm w-full text-left ${sortOption === 'least-recently-updated' ? 'bg-gray-100 text-gray-900' : 'text-gray-700'}`}
+                      onClick={() => {
+                        setSortOption('least-recently-updated');
+                        setIsSortMenuOpen(false);
+                      }}
+                    >
+                      <SortAsc className="h-4 w-4 inline mr-2" />
+                      Atualizadas há mais tempo
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="relative inline-block text-left">
               <div>
                 <button
@@ -201,9 +301,9 @@ const TaskList: React.FC = () => {
           </Link>
           
           <div className="text-sm text-gray-500">
-            <span className="font-semibold">{filteredTasks.length}</span> 
-            {filteredTasks.length === 1 ? ' tarefa encontrada' : ' tarefas encontradas'}
-            {filteredTasks.length !== tasks.length && (
+            <span className="font-semibold">{sortedTasks.length}</span> 
+            {sortedTasks.length === 1 ? ' tarefa encontrada' : ' tarefas encontradas'}
+            {sortedTasks.length !== tasks.length && (
               <span> (de {tasks.length} total)</span>
             )}
           </div>
@@ -211,8 +311,8 @@ const TaskList: React.FC = () => {
 
         <div className="mt-6">
           <ul className="divide-y divide-gray-200">
-            {filteredTasks.length > 0 ? (
-              filteredTasks.map((task) => (
+            {sortedTasks.length > 0 ? (
+              sortedTasks.map((task) => (
                 <li key={task.id} className="py-4 transition duration-150 ease-in-out hover:bg-gray-50">
                   <Link to={`/tasks/${task.id}`} className="block">
                     <div className="flex items-center px-4 py-2">

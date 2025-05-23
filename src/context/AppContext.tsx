@@ -13,6 +13,7 @@ interface AppContextType {
   addTicket: (ticket: Omit<Ticket, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateTicket: (ticket: Ticket) => void;
   updateTicketStatus: (id: string, status: TicketStatus) => void;
+  deleteTicket: (ticketId: string) => void; // Nova função para excluir tickets
   
   // Task methods
   addTask: (task: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => void;
@@ -20,6 +21,7 @@ interface AppContextType {
   updateTaskStatus: (id: string, status: TaskStatus) => void;
   associateTaskWithTicket: (taskId: string, ticketId: string) => void;
   dissociateTask: (taskId: string) => void;
+  deleteTask: (taskId: string) => void; // Adicionando a definição do método
   
   // Observation methods
   addObservation: (observation: Omit<Observation, 'id' | 'createdAt'>) => void;
@@ -37,6 +39,11 @@ interface AppContextType {
   getTicketsWithNoTasks: () => Ticket[];
   getTotalHoursForTask: (taskId: string) => number;
   getTotalHoursForTicket: (ticketId: string) => number;
+  
+  // Backup and restore methods
+  exportData: () => string;
+  importData: (jsonData: string) => boolean;
+  clearAllData: () => void; // Nova função para limpar todos os dados
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -132,6 +139,31 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     );
   };
 
+  const deleteTicket = useCallback((ticketId: string) => {
+    // Verificar se o ID existe
+    if (!ticketId) {
+      console.error("ID de chamado inválido");
+      return;
+    }
+    
+    // Remover associações de tarefas com este chamado
+    setTasks((prev) => 
+      prev.map((task) => 
+        task.ticketId === ticketId
+          ? { ...task, ticketId: undefined, updatedAt: new Date().toISOString() }
+          : task
+      )
+    );
+    
+    // Excluir todas as observações associadas ao chamado
+    setObservations((prev) => 
+      prev.filter((obs) => !(obs.parentId === ticketId && obs.parentType === 'ticket'))
+    );
+    
+    // Finalmente, excluir o chamado
+    setTickets((prev) => prev.filter((ticket) => ticket.id !== ticketId));
+  }, []);
+
   // Tasks methods
   const addTask = (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => {
     const now = new Date().toISOString();
@@ -184,6 +216,25 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       )
     );
   };
+
+  const deleteTask = useCallback((taskId: string) => {
+    // Verificar se o ID existe
+    if (!taskId) {
+      console.error("ID de tarefa inválido");
+      return;
+    }
+    
+    // Primeiro excluir todas as entradas de tempo associadas à tarefa
+    setTimeEntries((prev) => prev.filter((entry) => entry.taskId !== taskId));
+    
+    // Excluir todas as observações associadas à tarefa
+    setObservations((prev) => 
+      prev.filter((obs) => !(obs.parentId === taskId && obs.parentType === 'task'))
+    );
+    
+    // Finalmente, excluir a tarefa
+    setTasks((prev) => prev.filter((task) => task.id !== taskId));
+  }, []);
 
   // Observations methods
   const addObservation = (observationData: Omit<Observation, 'id' | 'createdAt'>) => {
@@ -273,6 +324,51 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     );
   };
 
+  // Backup and restore methods
+  const exportData = useCallback(() => {
+    const appData = {
+      tickets,
+      tasks,
+      observations,
+      timeEntries,
+      exportDate: new Date().toISOString(),
+      version: '1.0.0',
+    };
+    
+    return JSON.stringify(appData, null, 2);
+  }, [tickets, tasks, observations, timeEntries]);
+
+  const importData = useCallback((jsonData: string): boolean => {
+    try {
+      const parsedData = JSON.parse(jsonData);
+      
+      // Verificar se o arquivo possui uma estrutura válida
+      if (!parsedData.tickets || !parsedData.tasks || 
+          !parsedData.observations || !parsedData.timeEntries) {
+        return false;
+      }
+      
+      // Atualizar todos os dados
+      setTickets(parsedData.tickets);
+      setTasks(parsedData.tasks);
+      setObservations(parsedData.observations);
+      setTimeEntries(parsedData.timeEntries);
+      
+      return true;
+    } catch (error) {
+      console.error('Erro ao importar dados:', error);
+      return false;
+    }
+  }, []);
+
+  // Função para limpar todos os dados
+  const clearAllData = useCallback(() => {
+    setTickets([]);
+    setTasks([]);
+    setObservations([]);
+    setTimeEntries([]);
+  }, []);
+
   const value: AppContextType = {
     tickets,
     tasks,
@@ -281,11 +377,13 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     addTicket,
     updateTicket,
     updateTicketStatus,
+    deleteTicket, // Adicionando a nova função ao contexto
     addTask,
     updateTask,
     updateTaskStatus,
     associateTaskWithTicket,
     dissociateTask,
+    deleteTask, // Adicionando a função ao valor do contexto
     addObservation,
     updateObservation,
     deleteObservation,
@@ -297,6 +395,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     getTicketsWithNoTasks,
     getTotalHoursForTask,
     getTotalHoursForTicket,
+    exportData,
+    importData,
+    clearAllData, // Adicionando a nova função ao contexto
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

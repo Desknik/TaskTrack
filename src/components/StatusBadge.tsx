@@ -29,7 +29,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, type }) => {
           return 'bg-orange-100 text-orange-800';
         case 'em analise':
           return 'bg-cyan-100 text-cyan-800';
-        case 'done':
+        case 'finalizado':
           return 'bg-emerald-100 text-emerald-800';
         default:
           return 'bg-gray-100 text-gray-800';

@@ -1,3 +1,302 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Estilos para o editor TipTap */
+.tiptap-editor .ProseMirror {
+  outline: none;
+  min-height: 100px;
+}
+
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Garantir que imagens tenham tamanho máximo */
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Melhor visibilidade para links */
+.prose a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+/* Estilos básicos do editor convertidos de SCSS para CSS */
+.tiptap-editor .ProseMirror > *:first-child,
+.prose > *:first-child {
+  margin-top: 0;
+}
+
+/* Basic editor styles */
+.tiptap > *:first-child {
+  margin-top: 0;
+}
+
+/* Estilos para listas */
+.tiptap-editor .ProseMirror ul,
+.tiptap-editor .ProseMirror ol,
+.prose ul,
+.prose ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+
+.tiptap ul,
+.tiptap ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+
+.tiptap-editor .ProseMirror ul li p,
+.tiptap-editor .ProseMirror ol li p,
+.prose ul li p,
+.prose ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.tiptap ul li p,
+.tiptap ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* Ajustes específicos para garantir que os bullets das listas apareçam */
+.tiptap ul,
+.tiptap-editor .ProseMirror ul,
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.tiptap ol,
+.tiptap-editor .ProseMirror ol,
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+/* Ajustes para listas aninhadas */
+.tiptap ul ul,
+.tiptap-editor .ProseMirror ul ul,
+.prose ul ul {
+  list-style-type: circle;
+}
+
+.tiptap ul ul ul,
+.tiptap-editor .ProseMirror ul ul ul,
+.prose ul ul ul {
+  list-style-type: square;
+}
+
+/* Garantir que as listas de tarefas não tenham bullets */
+.tiptap ul[data-type="taskList"],
+.tiptap-editor .ProseMirror ul[data-type="taskList"],
+.prose ul[data-type="taskList"] {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Aumentar a especificidade para sobrescrever estilos padrão do Tailwind */
+.prose ul > li::marker,
+.tiptap ul > li::marker,
+.tiptap-editor .ProseMirror ul > li::marker {
+  color: #6b7280; /* gray-500 */
+}
+
+.prose ol > li::marker,
+.tiptap ol > li::marker,
+.tiptap-editor .ProseMirror ol > li::marker {
+  color: #6b7280; /* gray-500 */
+}
+
+.tiptap ul[data-type="taskList"] li,
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li,
+.prose ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+
+.tiptap ul[data-type="taskList"] li > label,
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li > label,
+.prose ul[data-type="taskList"] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.tiptap ul[data-type="taskList"] li > div,
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li > div,
+.prose ul[data-type="taskList"] li > div {
+  flex: 1 1 auto;
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"],
+.tiptap-editor .ProseMirror ul[data-type="taskList"] input[type="checkbox"],
+.prose ul[data-type="taskList"] input[type="checkbox"] {
+  cursor: pointer;
+  margin-right: 0.5em;
+}
+
+/* Corrigir o alinhamento vertical dos itens de tarefa */
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li {
+  padding-left: 0;
+}
+
+.tiptap-editor .ProseMirror ul[data-type="taskList"] li::before,
+.prose ul[data-type="taskList"] li::before {
+  display: none;
+}
+
+/* Garantir que as listas de tarefas não tenham margens que atrapalhem o layout */
+ul[data-type="taskList"] {
+  margin-left: 0;
+}
+
+.tiptap ul[data-type="taskList"] li {
+  align-items: center;
+  display: flex;
+}
+.tiptap ul[data-type="taskList"] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
+.tiptap ul[data-type="taskList"] li > div {
+  flex: 1 1 auto;
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"] {
+  cursor: pointer;
+}
+
+/* Estilos para headings */
+.tiptap-editor .ProseMirror h1,
+.tiptap-editor .ProseMirror h2,
+.tiptap-editor .ProseMirror h3,
+.tiptap-editor .ProseMirror h4,
+.tiptap-editor .ProseMirror h5,
+.tiptap-editor .ProseMirror h6,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  line-height: 1.1;
+  margin-top: 2.5rem;
+}
+
+.tiptap-editor .ProseMirror h1,
+.tiptap-editor .ProseMirror h2,
+.prose h1,
+.prose h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tiptap-editor .ProseMirror h1,
+.prose h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.tiptap-editor .ProseMirror h2,
+.prose h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tiptap-editor .ProseMirror h3,
+.prose h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tiptap-editor .ProseMirror h4,
+.tiptap-editor .ProseMirror h5,
+.tiptap-editor .ProseMirror h6,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Estilos para código inline e blocos de código */
+.tiptap-editor .ProseMirror code,
+.prose code {
+  background-color: #f3f4f6;
+  border-radius: 0.4rem;
+  color: #111827;
+  font-size: 0.85rem;
+  padding: 0.25em 0.3em;
+}
+
+.tiptap-editor .ProseMirror pre,
+.prose pre {
+  background: #1f2937;
+  border-radius: 0.5rem;
+  color: #f9fafb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+.tiptap-editor .ProseMirror pre code,
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0;
+}
+
+/* Estilos para citações */
+.tiptap-editor .ProseMirror blockquote,
+.prose blockquote {
+  border-left: 3px solid #d1d5db;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  color: #4b5563;
+  font-style: italic;
+}
+
+/* Estilos para linha horizontal */
+.tiptap-editor .ProseMirror hr,
+.prose hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2rem 0;
+}
+
+/* Ajustes adicionais para melhorar a aparência no modo de visualização */
+.prose p {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+/* Ajustes de espaçamento para listas */
+.prose ul li,
+.prose ol li {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* Tornar o texto clicável mais óbvio com underline */
+.prose a:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}

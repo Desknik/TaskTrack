@@ -4,6 +4,7 @@ import { Task, TaskStatus } from '../types';
 import { useAppContext } from '../context/AppContext';
 import { X } from 'lucide-react';
 import TagBadge from './TagBadge';
+import TiptapEditor from './TiptapEditor';
 
 interface TaskFormProps {
   task?: Task;
@@ -100,16 +101,13 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, isEditing = false, ticketId }
             </div>
 
             <div className="col-span-6">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
                 Descrição
               </label>
-              <textarea
-                id="description"
-                name="description"
-                rows={3}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+              <TiptapEditor
+                content={description}
+                onChange={setDescription}
+                placeholder="Descreva os detalhes da tarefa..."
               />
             </div>
 
@@ -176,7 +174,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, isEditing = false, ticketId }
                   type="text"
                   name="tags"
                   id="tags"
-                  className="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300"
+                  className="border px-3 focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300"
                   placeholder="Adicionar tag (ex: frontend, backend, documentação)"
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}

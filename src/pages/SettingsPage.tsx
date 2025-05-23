@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { Download, Upload, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Download, Upload, AlertTriangle, CheckCircle2, Trash2 } from 'lucide-react';
 
 const SettingsPage: React.FC = () => {
-  const { exportData, importData } = useAppContext();
+  const { exportData, importData, clearAllData } = useAppContext();
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -56,6 +56,17 @@ const SettingsPage: React.FC = () => {
       }
     };
     reader.readAsText(file);
+  };
+
+  // Função para limpar todos os dados
+  const handleClearAllData = () => {
+    if (window.confirm('ATENÇÃO: Esta ação irá excluir TODOS os dados da aplicação (chamados, tarefas, observações e registros de tempo). Esta ação não pode ser desfeita. Deseja continuar?')) {
+      if (window.confirm('Tem certeza? Esta é a última chance de desistir. Todos os dados serão perdidos permanentemente.')) {
+        clearAllData();
+        setImportStatus('success');
+        setStatusMessage('Todos os dados foram excluídos com sucesso.');
+      }
+    }
   };
 
   // Reset do status após 5 segundos
@@ -131,6 +142,30 @@ const SettingsPage: React.FC = () => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">Operações Perigosas</h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            Opções que podem resultar em perda de dados irreversível. Use com cautela.
+          </p>
+        </div>
+        <div className="border-t border-gray-200 px-4 py-5 sm:p-6">
+          <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+            <h4 className="text-base font-medium text-red-800 mb-2">Limpar todos os dados</h4>
+            <p className="text-sm text-red-700 mb-4">
+              Esta ação irá remover <strong>todos</strong> os dados da aplicação, incluindo chamados, tarefas, observações e registros de tempo. Esta ação não pode ser desfeita.
+            </p>
+            <button
+              onClick={handleClearAllData}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Excluir Todos os Dados
+            </button>
           </div>
         </div>
       </div>

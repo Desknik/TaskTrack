@@ -165,7 +165,7 @@ const ReportsPage: React.FC = () => {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2.5">
                   <div 
-                    className={`bg-blue-600 h-2.5 rounded-full`} 
+                    className={`bg-sky-500 h-2.5 rounded-full`} 
                     style={{ width: `${tickets.length > 0 ? (statusTickets.length / tickets.length) * 100 : 0}%` }}
                   ></div>
                 </div>
@@ -211,7 +211,7 @@ const ReportsPage: React.FC = () => {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2.5">
                   <div 
-                    className={`bg-green-600 h-2.5 rounded-full`} 
+                    className={`bg-green-400 h-2.5 rounded-full`} 
                     style={{ width: `${tasks.length > 0 ? (statusTasks.length / tasks.length) * 100 : 0}%` }}
                   ></div>
                 </div>
@@ -267,7 +267,7 @@ const ReportsPage: React.FC = () => {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2.5">
                     <div 
-                      className="bg-blue-600 h-2.5 rounded-full" 
+                      className="bg-violet-500 h-2.5 rounded-full" 
                       style={{ width: `${totalHours > 0 ? (ticket.hours / totalHours) * 100 : 0}%` }}
                     ></div>
                   </div>

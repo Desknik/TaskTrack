@@ -1,45 +1,51 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext';
-import StatusBadge from '../components/StatusBadge';
-import ObservationList from '../components/ObservationList';
-import ObservationForm from '../components/ObservationForm';
-import TimeEntryList from '../components/TimeEntryList';
-import TimeEntryForm from '../components/TimeEntryForm';
-import TagBadge from '../components/TagBadge';
-import { TaskStatus } from '../types';
-import { 
-  Edit, 
-  Clock,  
-  MessageSquare, 
-  ChevronDown, 
+import React, { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
+import StatusBadge from "../components/StatusBadge";
+import ObservationList from "../components/ObservationList";
+import ObservationForm from "../components/ObservationForm";
+import TimeEntryList from "../components/TimeEntryList";
+import TimeEntryForm from "../components/TimeEntryForm";
+import TagBadge from "../components/TagBadge";
+import { TiptapContent } from "../components/TiptapEditor";
+import { TaskStatus } from "../types";
+import {
+  Edit,
+  Clock,
+  MessageSquare,
+  ChevronDown,
   ChevronUp,
   ArrowLeft,
   Link as LinkIcon,
-  Unlink
-} from 'lucide-react';
-import { formatHoursToDisplay, formatHoursForTooltip } from '../utils/timeUtils';
+  Unlink,
+  Trash2,
+} from "lucide-react";
+import {
+  formatHoursToDisplay,
+  formatHoursForTooltip,
+} from "../utils/timeUtils";
 
 const TaskDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { 
-    tasks, 
+  const {
+    tasks,
     tickets,
-    updateTaskStatus, 
+    updateTaskStatus,
     associateTaskWithTicket,
     dissociateTask,
-    getTotalHoursForTask 
+    getTotalHoursForTask,
+    deleteTask,
   } = useAppContext();
 
   const [showObservationForm, setShowObservationForm] = useState(false);
   const [showObservations, setShowObservations] = useState(true);
   const [showTimeEntryForm, setShowTimeEntryForm] = useState(false);
   const [showTimeEntries, setShowTimeEntries] = useState(true);
-  const [selectedTicketId, setSelectedTicketId] = useState('');
+  const [selectedTicketId, setSelectedTicketId] = useState("");
 
   if (!id) {
-    navigate('/tasks');
+    navigate("/tasks");
     return null;
   }
 
@@ -48,7 +54,9 @@ const TaskDetail: React.FC = () => {
   if (!task) {
     return (
       <div className="text-center py-10">
-        <h2 className="text-xl font-semibold text-gray-700">Tarefa não encontrada</h2>
+        <h2 className="text-xl font-semibold text-gray-700">
+          Tarefa não encontrada
+        </h2>
         <div className="mt-4">
           <Link
             to="/tasks"
@@ -61,22 +69,23 @@ const TaskDetail: React.FC = () => {
     );
   }
 
-  const ticketTitle = task.ticketId 
-    ? tickets.find(t => t.id === task.ticketId)?.title || 'Chamado não encontrado'
-    : 'Sem chamado';
+  const ticketTitle = task.ticketId
+    ? tickets.find((t) => t.id === task.ticketId)?.title ||
+      "Chamado não encontrado"
+    : "Sem chamado";
 
   const totalHours = getTotalHoursForTask(id);
 
   const formatDate = (dateString: string) => {
-    const parts = dateString.split('-');
+    const parts = dateString.split("-");
     if (parts.length !== 3) return dateString;
-    
+
     const date = new Date(
-      parseInt(parts[0]), 
-      parseInt(parts[1]) - 1, 
+      parseInt(parts[0]),
+      parseInt(parts[1]) - 1,
       parseInt(parts[2])
     );
-    
+
     return date.toLocaleDateString();
   };
 
@@ -87,7 +96,18 @@ const TaskDetail: React.FC = () => {
   const handleAssociateTicket = () => {
     if (selectedTicketId) {
       associateTaskWithTicket(id, selectedTicketId);
-      setSelectedTicketId('');
+      setSelectedTicketId("");
+    }
+  };
+
+  const handleDeleteTask = () => {
+    if (
+      window.confirm(
+        "Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita."
+      )
+    ) {
+      deleteTask(id);
+      navigate("/tasks");
     }
   };
 
@@ -95,7 +115,7 @@ const TaskDetail: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center mb-4">
         <button
-          onClick={() => navigate('/tasks')}
+          onClick={() => navigate("/tasks")}
           className="mr-4 text-gray-500 hover:text-gray-700"
         >
           <ArrowLeft className="h-5 w-5" />
@@ -106,25 +126,37 @@ const TaskDetail: React.FC = () => {
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
           <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900">{task.title}</h3>
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              {task.title}
+            </h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">
               Criada em {formatDate(task.createdAt)}
             </p>
             {task.tags && task.tags.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-1">
-                {task.tags.map(tag => (
+                {task.tags.map((tag) => (
                   <TagBadge key={tag} tag={tag} />
                 ))}
               </div>
             )}
           </div>
-          <Link
-            to={`/tasks/${id}/edit`}
-            className="inline-flex items-center text-blue-600 hover:text-blue-900"
-          >
-            <Edit className="h-5 w-5" />
-            <span className="ml-1">Editar</span>
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link
+              to={`/tasks/${id}/edit`}
+              className="inline-flex items-center text-blue-600 hover:text-blue-900"
+            >
+              <Edit className="h-5 w-5" />
+              <span className="ml-1">Editar</span>
+            </Link>
+            <button
+              onClick={handleDeleteTask}
+              className="inline-flex items-center text-red-600 hover:text-red-700"
+              title="Excluir tarefa"
+            >
+              <Trash2 className="h-5 w-5" />
+              <span className="ml-1">Excluir</span>
+            </button>
+          </div>
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
           <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -134,30 +166,39 @@ const TaskDetail: React.FC = () => {
                 <select
                   value={task.status}
                   onChange={handleStatusChange}
-                  className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  className="block border p-2 w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  aria-label="Status da tarefa"
                 >
                   <option value="planejado">Planejado</option>
                   <option value="em andamento">Em andamento</option>
                   <option value="em analise">Em análise</option>
-                  <option value="done">Done</option>
+                  <option value="finalizado">Finalizado</option>
                 </select>
               </dd>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium text-gray-500">Última atualização</dt>
-              <dd className="mt-1 text-sm text-gray-900">{formatDate(task.updatedAt)}</dd>
+              <dt className="text-sm font-medium text-gray-500">
+                Última atualização
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {formatDate(task.updatedAt)}
+              </dd>
             </div>
             <div className="sm:col-span-2">
               <dt className="text-sm font-medium text-gray-500">Descrição</dt>
-              <dd className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{task.description}</dd>
+              <div className="content-container my-2 flex-grow">
+                <TiptapContent content={task.description} />
+              </div>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium text-gray-500">Chamado Associado</dt>
+              <dt className="text-sm font-medium text-gray-500">
+                Chamado Associado
+              </dt>
               <dd className="mt-1 text-sm text-gray-900">
                 {task.ticketId ? (
                   <div className="flex items-center justify-between">
-                    <Link 
-                      to={`/tickets/${task.ticketId}`} 
+                    <Link
+                      to={`/tickets/${task.ticketId}`}
                       className="text-blue-600 hover:text-blue-900"
                     >
                       {ticketTitle}
@@ -175,7 +216,8 @@ const TaskDetail: React.FC = () => {
                     <select
                       value={selectedTicketId}
                       onChange={(e) => setSelectedTicketId(e.target.value)}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className="block border p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      aria-label="Selecionar chamado para associar"
                     >
                       <option value="">Selecione um chamado...</option>
                       {tickets.map((ticket) => (
@@ -188,6 +230,8 @@ const TaskDetail: React.FC = () => {
                       onClick={handleAssociateTicket}
                       disabled={!selectedTicketId}
                       className="inline-flex items-center p-1 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-300"
+                      title="Associar chamado"
+                      aria-label="Associar chamado"
                     >
                       <LinkIcon className="h-4 w-4" />
                     </button>
@@ -198,12 +242,15 @@ const TaskDetail: React.FC = () => {
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Horas</dt>
               <dd className="mt-1 text-sm text-gray-900 flex items-center">
-                <Clock className="h-5 w-5 text-blue-500 mr-1" /> 
+                <Clock className="h-5 w-5 text-blue-500 mr-1" />
                 <span title={formatHoursForTooltip(totalHours)}>
                   {formatHoursToDisplay(totalHours)}
                 </span>
                 {task.estimatedHours && (
-                  <span className="ml-2 text-gray-500" title={formatHoursForTooltip(task.estimatedHours)}>
+                  <span
+                    className="ml-2 text-gray-500"
+                    title={formatHoursForTooltip(task.estimatedHours)}
+                  >
                     (estimado: {formatHoursToDisplay(task.estimatedHours)})
                   </span>
                 )}
@@ -215,7 +262,7 @@ const TaskDetail: React.FC = () => {
 
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
-          <button 
+          <button
             className="text-lg leading-6 font-medium text-gray-900 flex items-center"
             onClick={() => setShowTimeEntries(!showTimeEntries)}
           >
@@ -235,9 +282,9 @@ const TaskDetail: React.FC = () => {
         </div>
         {showTimeEntryForm && (
           <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-            <TimeEntryForm 
-              taskId={id} 
-              onComplete={() => setShowTimeEntryForm(false)} 
+            <TimeEntryForm
+              taskId={id}
+              onComplete={() => setShowTimeEntryForm(false)}
             />
           </div>
         )}
@@ -250,7 +297,7 @@ const TaskDetail: React.FC = () => {
 
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
-          <button 
+          <button
             className="text-lg leading-6 font-medium text-gray-900 flex items-center"
             onClick={() => setShowObservations(!showObservations)}
           >
@@ -270,10 +317,10 @@ const TaskDetail: React.FC = () => {
         </div>
         {showObservationForm && (
           <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-            <ObservationForm 
-              parentId={id} 
-              parentType="task" 
-              onComplete={() => setShowObservationForm(false)} 
+            <ObservationForm
+              parentId={id}
+              parentType="task"
+              onComplete={() => setShowObservationForm(false)}
             />
           </div>
         )}
