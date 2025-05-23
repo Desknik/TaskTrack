@@ -1,5 +1,5 @@
 export type TicketStatus = 'aberto' | 'pendente' | 'resolvido' | 'concluido';
-export type TaskStatus = 'planejado' | 'em andamento' | 'em analise' | 'done';
+export type TaskStatus = 'planejado' | 'em andamento' | 'em analise' | 'finalizado';
 
 export interface TimeEntry {
   id: string;

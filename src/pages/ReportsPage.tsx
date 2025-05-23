@@ -34,7 +34,7 @@ const ReportsPage: React.FC = () => {
     planejado: tasks.filter(t => t.status === 'planejado'),
     'em andamento': tasks.filter(t => t.status === 'em andamento'),
     'em analise': tasks.filter(t => t.status === 'em analise'),
-    done: tasks.filter(t => t.status === 'done')
+    finalizado: tasks.filter(t => t.status === 'finalizado')
   };
 
   // Data for hours reports

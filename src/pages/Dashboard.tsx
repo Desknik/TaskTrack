@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
     planejado: tasks.filter(t => t.status === 'planejado').length,
     'em andamento': tasks.filter(t => t.status === 'em andamento').length,
     'em analise': tasks.filter(t => t.status === 'em analise').length,
-    done: tasks.filter(t => t.status === 'done').length
+    finalizado: tasks.filter(t => t.status === 'finalizado').length
   };
 
   const totalHours = timeEntries.reduce((sum, entry) => sum + entry.hours, 0);
@@ -85,7 +85,7 @@ const Dashboard: React.FC = () => {
       case 'planejado': return 'bg-indigo-500';
       case 'em andamento': return 'bg-orange-500';
       case 'em analise': return 'bg-cyan-500';
-      case 'done': return 'bg-emerald-500';
+      case 'finalizado': return 'bg-emerald-500';
       default: return 'bg-gray-500';
     }
   };

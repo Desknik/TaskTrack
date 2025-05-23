@@ -222,13 +222,13 @@ const TaskList: React.FC = () => {
                       Em análise
                     </button>
                     <button
-                      className={`block px-4 py-2 text-sm w-full text-left ${statusFilter === 'done' ? 'bg-gray-100 text-gray-900' : 'text-gray-700'}`}
+                      className={`block px-4 py-2 text-sm w-full text-left ${statusFilter === 'finalizado' ? 'bg-gray-100 text-gray-900' : 'text-gray-700'}`}
                       onClick={() => {
-                        setStatusFilter('done');
+                        setStatusFilter('finalizado');
                         setIsFilterMenuOpen(false);
                       }}
                     >
-                      Done
+                      Finalizado
                     </button>
                   </div>
                 </div>

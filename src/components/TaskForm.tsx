@@ -125,7 +125,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, isEditing = false, ticketId }
                 <option value="planejado">Planejado</option>
                 <option value="em andamento">Em andamento</option>
                 <option value="em analise">Em análise</option>
-                <option value="done">Done</option>
+                <option value="finalizado">Finalizado</option>
               </select>
             </div>
 
