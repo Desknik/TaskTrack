@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "task-ticket-management",
-  "version": "0.1.0",
+  "productName": "Task Track",
+  "version": "0.1.2",
   "identifier": "com.desknik.tasktrack",
   "build": {
     "frontendDist": "../dist",
