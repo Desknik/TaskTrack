@@ -1,0 +1,647 @@
+{
+  "observations": [
+    {
+        "id": "a3bee892-09b4-4281-b803-01ffbfc2829b",
+        "parentId": "655456c8-d29b-432f-be02-85346d2ef964",
+        "parentType": "task",
+        "content": "Nova\n",
+        "createdAt": "2025-05-22T20:25:21.562Z"
+    },
+    {
+        "id": "acb72ca1-eeda-48ea-961b-b5f78d11aaa6",
+        "parentId": "d0abb337-363c-48b5-a528-10fce9647e47",
+        "parentType": "task",
+        "content": "Geração de logs em três cenários distintos:\nExecução bem-sucedida:\nQuando o processo for concluído com sucesso, realizando a autoaprovação dos registros conforme esperado, deve ser gerado um log contendo as seguintes informações:\n\nproject_id (utilizar 0 quando o processo abranger todos os projetos)\nPeríodo de referência\nQuantidade de registros afetados\nIdentificação do usuário autenticado que executou a rotina\nErro em tempo de execução:\nEm caso de falha durante a execução, um log como autorizado não é gerado, contendo informações relevantes para diagnóstico. Esse tipo de erro deve ser encaminhado à equipe de suporte para análise e correção.\n\nExecução sem erros, mas sem alterações:\nQuando o processo for executado com sucesso, sem gerar exceções, porém sem impactar registros (nenhuma atualização realizada), um log informativo também como autorizado não deve ser registrado. Esse cenário sugere a necessidade de revisão da lógica de validação ou dos filtros aplicados na rotina, podendo indicar uma condição de entrada não atendida.",
+        "createdAt": "2025-05-22T21:26:13.831Z"
+    },
+    {
+        "id": "8949fb22-a5b4-44a2-b519-7c39806a2926",
+        "parentId": "efcc2b88-01b4-45cf-9512-9eebfb5f671d",
+        "parentType": "ticket",
+        "content": "Chamado resolvido, mas a task ainda está aberta",
+        "createdAt": "2025-05-22T21:40:55.452Z"
+    }
+],
+
+"tasks": [
+    {
+      "id": "e5e221e8-ef5f-4a66-953f-e13c95489071",
+      "title": "# 3761 Visualização pelo Colaborador - ABA MEUS LANÇAMENTOS",
+      "description": "",
+      "status": "done",
+      "ticketId": "a3d12469-48de-407d-85d4-1c3958968880",
+      "estimatedHours": 0,
+      "createdAt": "2025-05-22T20:04:08.326Z",
+      "updatedAt": "2025-05-22T20:04:08.326Z"
+    },
+    {
+      "id": "655456c8-d29b-432f-be02-85346d2ef964",
+      "title": "#3757 Erro USB - Listagem de Despesas",
+      "description": "",
+      "status": "done",
+      "ticketId": "a3d12469-48de-407d-85d4-1c3958968880",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T20:05:05.606Z",
+      "updatedAt": "2025-05-22T20:05:05.606Z"
+    },
+    {
+      "id": "8737ba3c-b7c2-4e8c-a4a7-9952b4067f66",
+      "title": "#3758 Falso positivo",
+      "description": "Falso positivo ao adicionar uma despesa onde o limite de tamanho do arquivo é superado",
+      "status": "done",
+      "ticketId": "2d22852c-d2b3-4f74-aae9-1797a6edd095",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T20:48:08.357Z",
+      "updatedAt": "2025-05-22T20:48:08.357Z"
+    },
+    {
+      "id": "007675c5-4ab3-4f72-a4d2-324e7d1dfd35",
+      "title": "#3760 PRIORIDADE Lançamento de notas - Celular",
+      "description": "",
+      "status": "done",
+      "ticketId": "2d22852c-d2b3-4f74-aae9-1797a6edd095",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T20:48:35.426Z",
+      "updatedAt": "2025-05-22T20:48:50.375Z"
+    },
+    {
+      "id": "3625eb4a-7fcc-4b29-ad02-7841ee15f845",
+      "title": "3774 Auto-aprovação",
+      "description": "(Wiki criado especialmente para esse chamado)\n\nDesativar a trava por dia nas funções:\n- closePeriod\n- finalizarAprovação",
+      "status": "em analise",
+      "ticketId": "9a6b8a37-dc58-4bfd-9fe0-5ed6d85efd14",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T20:57:49.972Z",
+      "updatedAt": "2025-05-22T20:57:49.972Z"
+    },
+    {
+      "id": "b77e08d1-3201-40e5-9fe9-d4fd2b7f0470",
+      "title": "#3755 Totalizadores no relatório de despesas",
+      "description": "",
+      "status": "em analise",
+      "ticketId": "1093b17f-6070-4de7-888d-3d5a4a9ad1e7",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:03:19.789Z",
+      "updatedAt": "2025-05-22T21:03:19.789Z"
+    },
+    {
+      "id": "4c5bfeb7-e6d5-4bff-a155-dabfa1b42b72",
+      "title": "#3756 Remover forcedDownload",
+      "description": "Garantir que o arquivo será exibido em outra página ao realizar o download na rotina de Arquivos de Holerite/IR",
+      "status": "planejado",
+      "ticketId": "f2b5cca9-9081-4f03-a6ba-cbd97427ec69",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:06:22.739Z",
+      "updatedAt": "2025-05-22T21:07:13.017Z"
+    },
+    {
+      "id": "b43e4c5e-3f60-456b-b424-de0c15943072",
+      "title": "#3772  Erro de contagem no dashboard",
+      "description": "O cálculo no dashboard para a informação de aguardando liberação nos projetos estavam erradas, porém, era apenas a data que constava como 06/2025 e não 05/2025 como esperado.",
+      "status": "em analise",
+      "ticketId": "8e443f36-475e-4cfe-83d9-ba394722f3fb",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:09:02.858Z",
+      "updatedAt": "2025-05-22T21:09:09.714Z"
+    },
+    {
+      "id": "a4f10a7a-924c-4489-bc8c-fbd2fadb6eda",
+      "title": "#3764 Painel de projetos",
+      "description": "Adicionar autocomplete off, adicionar name não conflitante e avaliar se algum ajax ou alteração forçada nas rotinas envolvendo o painel possa estar vazando o preenchimento deste campo.",
+      "status": "planejado",
+      "ticketId": "cb273e3e-b6df-4dde-95a0-d351c384c923",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:11:41.830Z",
+      "updatedAt": "2025-05-22T21:11:41.830Z"
+    },
+    {
+      "id": "d93a3cb4-0f5b-41e5-95c1-7e98cf768493",
+      "title": "3771 Painel de colaborador (visão admin)",
+      "description": "Permitir visão para os administradores e assistentes",
+      "status": "em analise",
+      "ticketId": "070d48c2-14b6-454d-a16e-009d1cb60cfb",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:12:59.087Z",
+      "updatedAt": "2025-05-22T21:12:59.087Z"
+    },
+    {
+      "id": "0cf105b9-9987-4d03-be4e-703d5add20f7",
+      "title": "3763 Divergência de valores no RD mensal e lançamentos",
+      "description": "Não conseguimos replicar o ocorrido, foi orientado que o colaborador limpe o cache",
+      "status": "em analise",
+      "ticketId": "51ba3b89-4d51-4304-824f-565ccc3f4bad",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:14:56.500Z",
+      "updatedAt": "2025-05-22T21:14:56.500Z"
+    },
+    {
+      "id": "0f4f5312-65ff-48a4-bb0a-481b5bd03f06",
+      "title": "#3751 Despesa - Plano de Saúde",
+      "description": "Plano de Saúde devem ser criadas como aprovado e as antigas devem ser auto aprovadas para evitar este tipo de erro",
+      "status": "em analise",
+      "ticketId": "b2745d2b-d961-4b17-9a1c-b66452525420",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T21:18:29.511Z",
+      "updatedAt": "2025-05-22T21:19:00.636Z"
+    },
+    {
+      "id": "e8389508-0e96-46ff-a129-718350a8820e",
+      "title": "#3750 Download de Arquivos",
+      "description": "Erro de download de arquivos na home do colaborador onde não era possível baixar arquivos de IR e Holerite",
+      "status": "em analise",
+      "ticketId": "bba394ca-402c-4dc2-9fad-232520473380",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:20:35.563Z",
+      "updatedAt": "2025-05-22T21:20:35.563Z"
+    },
+    {
+      "id": "90074001-28d8-4c55-9a29-ad58acdd5d0c",
+      "title": "#3773 Troca de Gestor e supervisor",
+      "description": "",
+      "status": "em analise",
+      "ticketId": "e47fd2b5-c795-46a9-8d23-00c48a80c47c",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:24:24.278Z",
+      "updatedAt": "2025-05-22T21:24:24.278Z"
+    },
+    {
+      "id": "d0abb337-363c-48b5-a528-10fce9647e47",
+      "title": "3777  Logs de auto aprovação (Interno)",
+      "description": "Adicionar validação na rotina de autoApprove em Projects_expenses_model para garantir o logs_data_access com as seguintes informações:\nref_table: projects\nusers_id: usuário logado\nadditional_info: {\"month_ref\": \"\", \"rows\": 0}",
+      "status": "em analise",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T21:25:31.468Z",
+      "updatedAt": "2025-05-22T22:15:58.649Z"
+    },
+    {
+      "id": "4c008517-0540-4b2d-ba6e-dad9341d63a3",
+      "title": "#3775 Liberação para aprovação",
+      "description": "Aparentemente o sistema está achando que ele está com limite acima de 4000, pois vermelho significa que ele ultrapassou o teto, verificar o pq está vermelho uma vez que está abaixo dos 4000 configurados no projeto.",
+      "status": "em analise",
+      "ticketId": "986f1ea0-ef9e-47e3-b2f9-ae409bed5776",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T21:30:50.286Z",
+      "updatedAt": "2025-05-22T21:30:50.286Z"
+    },
+    {
+      "id": "2d542803-3efa-49c1-907f-3dadd944c333",
+      "title": "#3776 Observações na aprovação",
+      "description": "Adicionar campo de observações da despesa (projects_expenses.observations)  após o campo valor limite.",
+      "status": "em analise",
+      "ticketId": "6ad73557-a9f9-4155-ab15-2641a6234bde",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:32:30.713Z",
+      "updatedAt": "2025-05-22T21:32:30.713Z"
+    },
+    {
+      "id": "4401b18e-791c-4f15-85c7-7b4e1531721c",
+      "title": "#3781  E-mail de notificação",
+      "description": "Adicionar o nome do projeto no email de notificação do gestor, após o nome do colaborador:\n\nExemplo: [...] Matheus Ricardo Poleto (PTC PAM) [...]0,5",
+      "status": "em analise",
+      "ticketId": "8722be98-3ef2-4944-a2fb-714948c9feab",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:34:41.905Z",
+      "updatedAt": "2025-05-22T21:34:41.905Z"
+    },
+    {
+      "id": "5093977a-6c1c-4dea-a598-24604be6d6e4",
+      "title": "3785 Comunicado para usuários do tipo cliente",
+      "description": "Criar uma modal estática na tela inicial do portal após login, onde se for usuário do tipo cliente, exibir o comunicado abaixo 1x por dia até o dia 01/07/2025.\n\nArmazenar em localstorage se foi clicado no botão \"OK / fechar\" no dia que foi acessado, e ignorar a abertura caso já foi aberto, caso contrário mostrar a modal com o texto abaixo. \n\nEste bloco só deve existir para empresa COTABRA, não exibir nem adicionar no html para destak usando recursos do template.",
+      "status": "em analise",
+      "ticketId": "8273e2f1-deae-42e9-be9c-f8e1bc75694f",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:37:37.540Z",
+      "updatedAt": "2025-05-22T21:37:37.540Z"
+    },
+    {
+      "id": "0caf249a-d45f-4eb0-85f5-524ef9ae8ae4",
+      "title": "3770 Arquivos IR temporários",
+      "description": "Oferecer suporte para que arquivos na pasta temp possam ser movidos e manipulados dentro da AWS na lógica de IR e holerite.\n\nProblemas:\nAo excluir um registro \"Não Encontrado\", o arquivo não é removido do servidor\nAo definir/substituir um colaborador, o arquivo temporário perde a referência, não sobe pra aws e não é removido localmente\n",
+      "status": "em andamento",
+      "ticketId": "efcc2b88-01b4-45cf-9512-9eebfb5f671d",
+      "estimatedHours": 3,
+      "createdAt": "2025-05-22T21:39:43.444Z",
+      "updatedAt": "2025-05-22T21:39:43.444Z"
+    },
+    {
+      "id": "39a4e1fa-528e-4c10-97f1-b98dbd8004bd",
+      "title": "Orientações para o Cliente",
+      "description": "Orientado que se um usuário não estiver associado a ao menos um projeto, ele verá todos, pois será considerado um usuário do tipo \"Cliente\", e indicamos como atribuir um usuário a um projeto",
+      "status": "done",
+      "ticketId": "c6b2af02-a026-476e-a7c4-5142b065ba90",
+      "estimatedHours": 0,
+      "createdAt": "2025-05-22T21:46:39.713Z",
+      "updatedAt": "2025-05-22T21:46:39.713Z"
+    },
+    {
+      "id": "725e3031-e2a6-4c49-b60f-392d63c82234",
+      "title": "Mesclagem",
+      "description": "O chamado com o ID 5367 foi mesclado neste ticket.",
+      "status": "done",
+      "ticketId": "98f98895-7bfa-4e13-ac9e-7bf6b5097b32",
+      "estimatedHours": 0,
+      "createdAt": "2025-05-22T21:47:05.512Z",
+      "updatedAt": "2025-05-22T21:47:05.512Z"
+    },
+    {
+      "id": "b5fc6e2a-1602-45aa-b3f9-e35196336c70",
+      "title": "#3759 Cadastro - anexo de documentos",
+      "description": "",
+      "status": "done",
+      "ticketId": "d756f7a7-3ee8-419d-8971-d37441b9744d",
+      "estimatedHours": 0.5,
+      "createdAt": "2025-05-22T21:50:04.429Z",
+      "updatedAt": "2025-05-22T21:50:04.429Z"
+    },
+    {
+      "id": "795d60b5-c874-4a02-9a2e-3648efe5ec93",
+      "title": "3748 Ajuste de deleção (Interno)",
+      "description": "Ao deletar um usuário auditado (que teve alterações em suas informações), o fato de estar associado a tabela de auditoria impede a exclusão do registro\n\nAvaliar se não é log de acesso ou log de data access",
+      "status": "em andamento",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T21:56:02.377Z",
+      "updatedAt": "2025-05-22T22:15:48.965Z"
+    },
+    {
+      "id": "102a76a3-2800-4431-a187-ca1a7109dade",
+      "title": "3780 Painel de despesas - Despesas fantasmas (Interno)",
+      "description": "Despesas \"fantasmas\" estão sendo consideradas no painel e despesas, como no exemplo abaixo, que aparece duas despesas, mas só tem uma aguardando liberação.\n\nMuito provavelmente, está sendo considerada despesas de plano de saúde, ou alguma outra despesa que não deveria ser considerada na consulta.",
+      "status": "planejado",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T21:57:12.932Z",
+      "updatedAt": "2025-05-22T22:15:37.851Z"
+    },
+    {
+      "id": "3c766906-9465-4f17-b16e-3ac7795260a7",
+      "title": "#3778 Acesso gerente/supervisor colaboradores ativos Melhoria",
+      "description": "Filtrar apenas colaboradores ativos nos projetos quando acessado via gerente/supervisor.\n\nEnvolve\ntabela de colaboradores do projeto\nlançamentos de despesas\nfolha de pagamento",
+      "status": "planejado",
+      "ticketId": "cffc2da4-d8c5-4c39-b7f4-6998c5f1137a",
+      "estimatedHours": 1,
+      "createdAt": "2025-05-22T22:00:43.229Z",
+      "updatedAt": "2025-05-22T22:00:43.229Z"
+    }
+  ],
+
+  "tickets": [
+    {
+      "id": "a3d12469-48de-407d-85d4-1c3958968880",
+      "title": "5358 - Visualização pelo Colaborador - ABA MEUS LANÇAMENTOS",
+      "description": "",
+      "status": "concluido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T20:03:35.378Z",
+      "updatedAt": "2025-05-22T20:03:35.378Z"
+    },
+    {
+      "id": "2d22852c-d2b3-4f74-aae9-1797a6edd095",
+      "title": "5357 Lançamento de notas - Celular",
+      "description": "Erro ao mandar arquivos grandes, estava ocorrendo um falso positivo",
+      "status": "concluido",
+      "priority": "média",
+      "createdAt": "2025-05-22T20:47:20.936Z",
+      "updatedAt": "2025-05-22T20:47:20.936Z"
+    },
+    {
+      "id": "9a6b8a37-dc58-4bfd-9fe0-5ed6d85efd14",
+      "title": "5371 Projetos que não passam pelo fluxo de aprovações",
+      "description": "",
+      "status": "resolvido",
+      "priority": "média",
+      "createdAt": "2025-05-22T20:56:46.804Z",
+      "updatedAt": "2025-05-22T20:56:46.804Z"
+    },
+    {
+      "id": "1093b17f-6070-4de7-888d-3d5a4a9ad1e7",
+      "title": "5353 Totalizadores no relatório de despesas",
+      "description": "Incluir a soma nos relatorios de pagamentos",
+      "status": "concluido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:01:04.975Z",
+      "updatedAt": "2025-05-22T21:03:24.937Z"
+    },
+    {
+      "id": "f2b5cca9-9081-4f03-a6ba-cbd97427ec69",
+      "title": "5350 Link download de arquivos",
+      "description": "",
+      "status": "concluido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:05:41.676Z",
+      "updatedAt": "2025-05-22T21:44:28.729Z"
+    },
+    {
+      "id": "8e443f36-475e-4cfe-83d9-ba394722f3fb",
+      "title": "5368 Contadores da Tela Incial",
+      "description": "",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:08:43.015Z",
+      "updatedAt": "2025-05-22T21:08:43.015Z"
+    },
+    {
+      "id": "cb273e3e-b6df-4dde-95a0-d351c384c923",
+      "title": "5360 ERRO DE LANÇAMENTO TODOS OS AMBIENTES",
+      "description": "",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:10:40.894Z",
+      "updatedAt": "2025-05-22T21:10:40.894Z"
+    },
+    {
+      "id": "070d48c2-14b6-454d-a16e-009d1cb60cfb",
+      "title": "5367 Lupa Cooperado - Relação de lançamentos",
+      "description": "",
+      "status": "concluido",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:12:39.780Z",
+      "updatedAt": "2025-05-22T21:12:39.780Z"
+    },
+    {
+      "id": "51ba3b89-4d51-4304-824f-565ccc3f4bad",
+      "title": "5361 Relatorio está em compativel que aparece de lançamento",
+      "description": "",
+      "status": "concluido",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:14:08.980Z",
+      "updatedAt": "2025-05-22T21:14:08.980Z"
+    },
+    {
+      "id": "b2745d2b-d961-4b17-9a1c-b66452525420",
+      "title": "5352 Plano de Saúde - Reprovado",
+      "description": "",
+      "status": "concluido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:17:52.190Z",
+      "updatedAt": "2025-05-22T21:17:52.190Z"
+    },
+    {
+      "id": "bba394ca-402c-4dc2-9fad-232520473380",
+      "title": "5348 Arquivos",
+      "description": "Os cooperados não estão conseguindo baixar arquivos tipo holerite, IR. ",
+      "status": "concluido",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:20:10.624Z",
+      "updatedAt": "2025-05-22T21:20:10.624Z"
+    },
+    {
+      "id": "e47fd2b5-c795-46a9-8d23-00c48a80c47c",
+      "title": "5369 Contadores da Tela Incial - Outro caso",
+      "description": "",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:23:57.755Z",
+      "updatedAt": "2025-05-22T21:23:57.755Z"
+    },
+    {
+      "id": "986f1ea0-ef9e-47e3-b2f9-ae409bed5776",
+      "title": "5372 Liberação para aprovação",
+      "description": "Fizemos a liberação de todos os cooperados do projeto CAMPO INTEGRADO, porém, o Matheus fica em vermelho.",
+      "status": "resolvido",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:30:12.337Z",
+      "updatedAt": "2025-05-22T21:30:12.337Z"
+    },
+    {
+      "id": "6ad73557-a9f9-4155-ab15-2641a6234bde",
+      "title": "5373 Observações na Aprovação",
+      "description": "",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:32:06.725Z",
+      "updatedAt": "2025-05-22T21:32:06.725Z"
+    },
+    {
+      "id": "8722be98-3ef2-4944-a2fb-714948c9feab",
+      "title": "5378 E-mail de notificação aos gestores",
+      "description": "Foi solicitado pela Frances que no e-mail de notificação colaborador liberado para análise, acrescente o nome do projeto.",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:34:08.311Z",
+      "updatedAt": "2025-05-22T21:34:20.484Z"
+    },
+    {
+      "id": "8273e2f1-deae-42e9-be9c-f8e1bc75694f",
+      "title": "5380 Comunicado para cliente interno no portal",
+      "description": "Foi solicitado pela Frances via whatsapp a inclusão de um comunicado interno no portal para os gestores do cliente no portal COTABRA.",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:37:11.791Z",
+      "updatedAt": "2025-05-22T21:37:11.791Z"
+    },
+    {
+      "id": "efcc2b88-01b4-45cf-9512-9eebfb5f671d",
+      "title": "5365 ARQUIVOS IR URGENTE",
+      "description": "Preciso que volte o funcionamento dos arquivos para online, pois não conseguimos abrir os dos inativos. \n\nAnteriormente abriamos os arquivos na aba para baixar. \n\nEstá dando arquivo não encontrado. ",
+      "status": "resolvido",
+      "priority": "alta",
+      "createdAt": "2025-05-22T21:39:06.486Z",
+      "updatedAt": "2025-05-22T21:39:06.486Z"
+    },
+    {
+      "id": "98f98895-7bfa-4e13-ac9e-7bf6b5097b32",
+      "title": "5366 Lupa das conferencias de notas - Urgente",
+      "description": "O chamado com o ID 5367 foi mesclado neste ticket.\n\nFoi explicado para o cliente que ocorria pelo colaborador provavelmente não lançar o informe de KM. Foi adicionado tratamento para que seja sempre visível, independente do KM, quando admin ou assistente.",
+      "status": "resolvido",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:43:32.394Z",
+      "updatedAt": "2025-05-22T21:43:32.394Z"
+    },
+    {
+      "id": "c6b2af02-a026-476e-a7c4-5142b065ba90",
+      "title": "5375 ACESSO GERENTE - projetos alocados",
+      "description": "Fizemos um acesso de teste para gerente e supervisor. \n\nCadastramos no projeto Datamanenger \nObservamos que está puxando todos os projetos ativos e finalizados, porém deveria aparecer somente o projeto vinculado e não pelo cliente. \n\nE os projeto finalizados não deve aparece para os clientes. ",
+      "status": "resolvido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:46:07.215Z",
+      "updatedAt": "2025-05-22T21:46:07.215Z"
+    },
+    {
+      "id": "d756f7a7-3ee8-419d-8971-d37441b9744d",
+      "title": "5356 Cadastro - anexo de documentos",
+      "description": "Precisamos que o botão de download esteja em todos os documentos, inclusive para os cooperados.",
+      "status": "concluido",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T21:49:30.723Z",
+      "updatedAt": "2025-05-22T21:49:30.723Z"
+    },
+    {
+      "id": "ae612acd-0034-4df6-a1e9-dfc77a23c2c7",
+      "title": "5363 Plataforma de chamados SVI (Freshdesk)",
+      "description": "Foi identificado que os e-mails enviados para a plataforma de chamados não estavam sendo recebidos devido a bloqueios por spam. Após análise, verificou-se que os envios estavam sendo marcados com alta pontuação de spam, o que levou à orientação para ajustes nas configurações do domínio de e-mail e envio de mensagens para análise. A equipe técnica também iniciou medidas para evitar novos bloqueios, e o atendimento foi finalizado com as devidas instruções repassadas ao time responsável.",
+      "status": "resolvido",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:54:01.444Z",
+      "updatedAt": "2025-05-22T21:54:01.444Z"
+    },
+    {
+      "id": "cffc2da4-d8c5-4c39-b7f4-6998c5f1137a",
+      "title": "5374 Acesso Gerente/Supervisor",
+      "description": "Para os gerentes, devem aparecer somente os cooperados ativos. Está aparecendo de todos.",
+      "status": "aberto",
+      "priority": "média",
+      "createdAt": "2025-05-22T21:58:16.227Z",
+      "updatedAt": "2025-05-22T21:58:16.227Z"
+    },
+    {
+      "id": "20a5a6d5-043f-44e9-8481-d47b169dd7c3",
+      "title": "5355 Classificação de plano de saúde e pagamentos (Orçamento)",
+      "description": "Em orçamento, aguardando o cliente\nResponsável: Marcos",
+      "status": "pendente",
+      "priority": "baixa",
+      "createdAt": "2025-05-22T22:02:38.096Z",
+      "updatedAt": "2025-05-22T22:02:38.096Z"
+    },
+    {
+      "id": "f7686021-ce4e-43d3-bff9-c5e3ee67e282",
+      "title": "5359 Relatório Plano de Saúde - aba de relatorios (Orçamento)",
+      "description": "Em orçamento, aguardando o cliente.\nResponsável: Marcos",
+      "status": "pendente",
+      "priority": "média",
+      "createdAt": "2025-05-22T22:03:15.669Z",
+      "updatedAt": "2025-05-22T22:16:25.892Z"
+    }
+  ],
+
+  "timeEntries": [
+    {
+      "id": "6fd297fe-2ee7-4d8f-93f3-6ee48f72682c",
+      "taskId": "655456c8-d29b-432f-be02-85346d2ef964",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "06f563d0-cc8b-44ce-90c0-9ad25a1c075a",
+      "taskId": "007675c5-4ab3-4f72-a4d2-324e7d1dfd35",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "6c36af3d-967c-4645-a239-5a882ce12acf",
+      "taskId": "8737ba3c-b7c2-4e8c-a4a7-9952b4067f66",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "655932ce-790f-4f0f-84ef-5fd868e170bf",
+      "taskId": "3625eb4a-7fcc-4b29-ad02-7841ee15f845",
+      "hours": 1,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "28e59f8f-7576-45d8-bd62-9403e8c7dc91",
+      "taskId": "b77e08d1-3201-40e5-9fe9-d4fd2b7f0470",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "ba3af8af-52d2-4de2-a657-d7393a168436",
+      "taskId": "4c5bfeb7-e6d5-4bff-a155-dabfa1b42b72",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "7a91a1ab-2080-49ef-b941-f463e9965d3f",
+      "taskId": "b43e4c5e-3f60-456b-b424-de0c15943072",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "cd185b95-75dc-436e-aff1-c02b82708c1d",
+      "taskId": "a4f10a7a-924c-4489-bc8c-fbd2fadb6eda",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "130f8779-d683-4415-8a80-b969b3ce2edd",
+      "taskId": "d93a3cb4-0f5b-41e5-95c1-7e98cf768493",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "582bf372-d9a6-40c8-b285-aeb2c42e9d08",
+      "taskId": "0cf105b9-9987-4d03-be4e-703d5add20f7",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": "Testes"
+    },
+    {
+      "id": "febe4fe5-591e-4f5c-ab43-2f5dc9a435ba",
+      "taskId": "0f4f5312-65ff-48a4-bb0a-481b5bd03f06",
+      "hours": 0.75,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "bed467c2-a4af-450d-9668-4ce7d4929542",
+      "taskId": "e8389508-0e96-46ff-a129-718350a8820e",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "607aa346-591e-4df7-a579-5a54dc0af687",
+      "taskId": "90074001-28d8-4c55-9a29-ad58acdd5d0c",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "8de7f797-8524-49cb-8f5f-6146f8d98698",
+      "taskId": "d0abb337-363c-48b5-a528-10fce9647e47",
+      "hours": 0.75,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "aa72aedc-0f2e-4d9c-aea2-e70edff0f0e0",
+      "taskId": "4c008517-0540-4b2d-ba6e-dad9341d63a3",
+      "hours": 1,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "ae431e5e-6944-465d-b6d4-4a71a6affaf3",
+      "taskId": "2d542803-3efa-49c1-907f-3dadd944c333",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "bfb7bd1a-3170-4e2c-bcd4-0e81fb9254a8",
+      "taskId": "4401b18e-791c-4f15-85c7-7b4e1531721c",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "df3ae7b3-b27b-402c-bf34-757686f08f81",
+      "taskId": "5093977a-6c1c-4dea-a598-24604be6d6e4",
+      "hours": 0.5,
+      "date": "2025-05-22",
+      "description": ""
+    },
+    {
+      "id": "37ac15f3-cc04-45ae-9fed-4f89a1870629",
+      "taskId": "0caf249a-d45f-4eb0-85f5-524ef9ae8ae4",
+      "hours": 1,
+      "date": "2025-05-21",
+      "description": ""
+    },
+    {
+      "id": "78052902-ab74-4e63-8a77-9bac34f4641f",
+      "taskId": "b5fc6e2a-1602-45aa-b3f9-e35196336c70",
+      "hours": 0.25,
+      "date": "2025-05-22",
+      "description": ""
+    }
+  ]
+}   
