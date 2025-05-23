@@ -4,6 +4,7 @@ import StatusBadge from '../components/StatusBadge';
 import { Link } from 'react-router-dom';
 import { TicketStatus, TaskStatus } from '../types';
 import { BarChart3, PieChart, Filter, ArrowDownWideNarrow } from 'lucide-react';
+import TagBadge from '../components/TagBadge';
 
 const ReportsPage: React.FC = () => {
   const { 
@@ -80,7 +81,14 @@ const ReportsPage: React.FC = () => {
                   <Link to={`/tasks/${task.id}`} className="block">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-blue-600">{task.title}</p>
+                        <div className="flex items-center flex-wrap gap-1">
+                          <p className="text-sm font-medium text-blue-600">{task.title}</p>
+                          {task.tags && task.tags.length > 0 && (
+                            task.tags.map((tag) => (
+                              <TagBadge key={tag} tag={tag} />
+                            ))
+                          )}
+                        </div>
                         <p className="text-sm text-gray-500 mt-1">{formatDate(task.updatedAt)}</p>
                       </div>
                       <StatusBadge status={task.status} type="task" />
@@ -115,7 +123,14 @@ const ReportsPage: React.FC = () => {
                   <Link to={`/tickets/${ticket.id}`} className="block">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-blue-600">{ticket.title}</p>
+                        <div className="flex items-center flex-wrap gap-1">
+                          <p className="text-sm font-medium text-blue-600">{ticket.title}</p>
+                          {ticket.tags && ticket.tags.length > 0 && (
+                            ticket.tags.map((tag) => (
+                              <TagBadge key={tag} tag={tag} />
+                            ))
+                          )}
+                        </div>
                         <p className="text-sm text-gray-500 mt-1">{formatDate(ticket.updatedAt)}</p>
                       </div>
                       <div className="flex items-center">
