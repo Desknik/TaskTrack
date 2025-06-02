@@ -4,9 +4,10 @@ import { TicketStatus, TaskStatus } from '../types';
 interface StatusBadgeProps {
   status: TicketStatus | TaskStatus;
   type: 'ticket' | 'task';
+  className?: string;
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ status, type }) => {
+const StatusBadge: React.FC<StatusBadgeProps> = ({ status, type, className = '' }) => {
   const getStatusColor = () => {
     if (type === 'ticket') {
       switch (status) {
@@ -36,10 +37,9 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, type }) => {
       }
     }
   };
-
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor()}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor()} ${className}`}
     >
       {status}
     </span>

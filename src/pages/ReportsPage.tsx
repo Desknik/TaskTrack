@@ -3,8 +3,9 @@ import { useAppContext } from '../context/AppContext';
 import StatusBadge from '../components/StatusBadge';
 import { Link } from 'react-router-dom';
 import { TicketStatus, TaskStatus } from '../types';
-import { BarChart3, PieChart, Filter, ArrowDownWideNarrow } from 'lucide-react';
+import { BarChart3, PieChart, Filter, Download } from 'lucide-react';
 import TagBadge from '../components/TagBadge';
+import { generateWorkHoursPDFReport } from '../utils/pdfUtils';
 
 const ReportsPage: React.FC = () => {
   const { 
@@ -19,6 +20,18 @@ const ReportsPage: React.FC = () => {
   } = useAppContext();
 
   const [selectedReport, setSelectedReport] = useState<'unassociated' | 'byStatus' | 'byHours'>('unassociated');
+  
+  // Função para exportar relatório PDF
+  const handleExportPDF = () => {
+    generateWorkHoursPDFReport({
+      tickets,
+      tasks,
+      timeEntries,
+      getTotalHoursForTicket,
+      getTotalHoursForTask,
+      getTasksForTicket
+    });
+  };
   
   const unassociatedTasks = getUnassociatedTasks();
   const ticketsWithNoTasks = getTicketsWithNoTasks();
@@ -177,10 +190,9 @@ const ReportsPage: React.FC = () => {
                   <span className="text-sm text-gray-500">
                     {tickets.length > 0 ? Math.round((statusTickets.length / tickets.length) * 100) : 0}%
                   </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                </div>                <div className="w-full bg-gray-200 rounded-full h-2.5">
                   <div 
-                    className={`bg-sky-500 h-2.5 rounded-full`} 
+                    className="bg-sky-500 h-2.5 rounded-full" 
                     style={{ width: `${tickets.length > 0 ? (statusTickets.length / tickets.length) * 100 : 0}%` }}
                   ></div>
                 </div>
@@ -223,10 +235,9 @@ const ReportsPage: React.FC = () => {
                   <span className="text-sm text-gray-500">
                     {tasks.length > 0 ? Math.round((statusTasks.length / tasks.length) * 100) : 0}%
                   </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                </div>                <div className="w-full bg-gray-200 rounded-full h-2.5">
                   <div 
-                    className={`bg-green-400 h-2.5 rounded-full`} 
+                    className="bg-green-400 h-2.5 rounded-full" 
                     style={{ width: `${tasks.length > 0 ? (statusTasks.length / tasks.length) * 100 : 0}%` }}
                   ></div>
                 </div>
@@ -347,13 +358,19 @@ const ReportsPage: React.FC = () => {
       </div>
     </>
   );
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">Relatórios</h1>
         
         <div className="flex space-x-2">
+          <button
+            onClick={handleExportPDF}
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          >
+            <Download className="h-4 w-4 mr-1" />
+            Exportar PDF
+          </button>
           <button
             onClick={() => setSelectedReport('unassociated')}
             className={`inline-flex items-center px-3 py-2 border text-sm font-medium rounded-md ${
