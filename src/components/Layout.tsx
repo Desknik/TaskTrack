@@ -46,10 +46,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <span className="sr-only">Fechar menu</span>
-                <X className="h-6 w-6 text-white" aria-hidden="true" />
-              </button>
+                <X className="h-6 w-6 text-white" aria-hidden="true" />              </button>
             </div>
             <div className="flex flex-shrink-0 items-center px-4">
+              <img src="/pwa-192x192.png" alt="TaskTrack" className="h-8 w-8 mr-3" />
               <h1 className="text-2xl font-bold text-blue-600">TaskTrack</h1>
             </div>
             <div className="mt-5 h-0 flex-1 overflow-y-auto">
@@ -84,9 +84,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5">
+      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">        <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
+            <img src="/pwa-192x192.png" alt="TaskTrack" className="h-8 w-8 mr-3" />
             <h1 className="text-2xl font-bold text-blue-600">TaskTrack</h1>
           </div>
           <div className="mt-5 flex flex-grow flex-col">
