@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { Download, Upload, AlertTriangle, CheckCircle2, Trash2 } from 'lucide-react';
+import PWASettings from '../components/PWASettings';
 
 const SettingsPage: React.FC = () => {
   const { exportData, importData, clearAllData } = useAppContext();
@@ -79,10 +80,12 @@ const SettingsPage: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [importStatus]);
-
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-gray-900">Configurações</h1>
+      
+      {/* Configurações PWA */}
+      <PWASettings />
       
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6">

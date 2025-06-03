@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Layout from './components/Layout';
+import PWABanner from './components/PWABanner';
 import Dashboard from './pages/Dashboard';
 import TicketsPage from './pages/TicketsPage';
 import TasksPage from './pages/TasksPage';
@@ -19,6 +20,7 @@ function App() {
   return (
     <AppProvider>
       <Router>
+        <PWABanner />
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
